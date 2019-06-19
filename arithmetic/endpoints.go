@@ -12,6 +12,7 @@ import (
    @Author : ff
    @DESC   : 请求、响应类型
 */
+//endpoint，调用Service中相应的方法处理请求对象（ArithmeticRequest），返回响应对象（ArithmeticResponse）
 var (
 	ErrInvalidRequestType = errors.New("RequestType has only four type: Add,Subtract,Multiply,Divide")
 )
@@ -26,9 +27,6 @@ type ArithmeticResponse struct {
 	Result int   `json:"result"`
 	Error  error `json:"error"`
 }
-
-//endpoint，调用Service中相应的方法处理请求对象（ArithmeticRequest），返回响应对象（ArithmeticResponse）
-type ArithmeticEndpoint endpoint.Endpoint
 
 func MakeArithmeticEndpoint(svc Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {

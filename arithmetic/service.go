@@ -41,5 +41,5 @@ func (s ArithmeticService) Divide(a, b int) (int, error) {
 
 	return a / b, nil
 }
-
+//声明函数
 type ServiceMiddleware func(Service) Service

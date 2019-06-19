@@ -29,13 +29,14 @@ func main() {
 
 	//日志中间件
 	svc = LoggingMiddleware(logger)(svc)
-
+	//创建Endpoint对象
 	endpoint := MakeArithmeticEndpoint(svc)
 
 	//添加限流，每秒刷新一次，容量为3
 	ratebucket := ratelimit.NewBucket(time.Second*1, 3)
 	endpoint = NewTokenBucketLimitterWithJuju(ratebucket)(endpoint)
 
+	//创建http处理对象handlder
 	r := MakeHttpHandler(ctx, endpoint, logger)
 
 	go func() {
